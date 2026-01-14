@@ -60,7 +60,7 @@ class ScanController extends Controller
             $content = Storage::disk('private')->get($path);
 
             $process = Process::run([
-                'python',
+                'python3',
                 base_path('extract_metrics.py'),
                 $fullPath
             ]);
