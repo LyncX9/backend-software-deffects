@@ -137,7 +137,7 @@ def analyze_file(file_path):
         "deterministic_clean": False
     }
 
-    rc, out, _ = run_cmd(f'python -m radon cc -s -j "{file_path}"')
+    rc, out, _ = run_cmd(f'{sys.executable} -m radon cc -s -j "{file_path}"')
     if rc == 0 and out:
         try:
             parsed = json.loads(out)
@@ -148,7 +148,7 @@ def analyze_file(file_path):
         except:
             pass
 
-    rc, out, _ = run_cmd(f'python -m pylint --output-format=json "{file_path}"')
+    rc, out, _ = run_cmd(f'{sys.executable} -m pylint --output-format=json "{file_path}"')
     metrics["pylint_rc"] = rc
     if out:
         try:
@@ -157,7 +157,7 @@ def analyze_file(file_path):
         except:
             pass
 
-    rc, out, _ = run_cmd(f'python -m bandit -r "{file_path}" -f json')
+    rc, out, _ = run_cmd(f'{sys.executable} -m bandit -r "{file_path}" -f json')
     metrics["bandit_rc"] = rc
     if out:
         try:
