@@ -66,7 +66,12 @@ class ScanController extends Controller
             ]);
 
             if ($process->failed()) {
-                return response()->json(['error' => 'Metric extraction failed'], 500);
+                return response()->json([
+                    'error' => 'Metric extraction failed',
+                    'cmd' => $process->command(),
+                    'output' => $process->output(),
+                    'error_output' => $process->errorOutput(),
+                ], 500);
             }
 
             $metrics = json_decode($process->output(), true);
